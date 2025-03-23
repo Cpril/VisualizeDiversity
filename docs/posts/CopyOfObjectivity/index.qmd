@@ -1,19 +1,74 @@
 ---
-title: "Diversity in Sustainability"
+title: "Gender Distribution"
 author: "Priscilla Chen"
 date: "2025-02-17"
 categories: [practices]
 image: "image.jpg"
+embed-resources: true
 ---
 
-------------------------------------------------------------------------
+----------------------------------------------------------------------
 
-Inspired by Conversation with Lovejoy Teira
+```{r}
+#| include: false
+library(readr)
+library(reticulate)
+library(dplyr)
+library(mosaic)
+library(tidyverse)
+library(tidyr)
+library(vegabrite)
+library(base64enc)
+library(vegalite)
+```
 
-------------------------------------------------------------------------
+```{r}
+Administration <- read.csv("/rprojects/jc253/VisualizeDiversity/docs/posts/CopyOfObjectivity/Core290_Final(Administration).csv")
+Chairs <- read.csv("/rprojects/jc253/VisualizeDiversity/docs/posts/CopyOfObjectivity/Core290_Final(Chairs+Directors).csv")
+Chairs <- na.omit(Chairs)
+```
+```{r}
+# Department and gender
+depart_gender <- Chairs %>%
+  group_by(Department, Gender) |>
+  summarise(Count = n(), .groups = 'drop')|>
+  mutate(Department = ifelse(Department == "School of Humanities, Arts, and Social Sciences", 
+                             "School of Humanities", Department))|>
+  mutate(Department = gsub("School of ", "", Department))
+depart_gender <-
+  depart_gender[-1, ]
 
-When I walk in the Chinese food market, there's such variety there. My mom and I would walk down the ailse while discussing what dishes to make for the food for the day.
+sort_order <- list("Health", "Humanities", "Business", "Education", "STEM")
+depart_gender_plot <- vl_chart(width = 300, height = 300)|>
+  vl_mark_bar()|>
+  vl_encode_x("Count:Q", title = "Number of Department Leadership")|>
+  vl_encode_y("Department:N", title = "", sort = sort_order)|>
+  vl_encode_yOffset("Gender:N")|>
+  vl_encode_color("Gender:N", title = "")|>
+  vl_add_data(depart_gender)
+depart_gender_plot
+```
 
-My friend from Uganda said that they don't have
 
-I was once asked whether Chinese people would eat cats or dogs.
+```{r}
+# Gender and title
+title_gender <- Chairs |>
+  group_by(Title, Gender)|>
+  summarise(Count = n(), .groups = "drop")
+title_gender <-
+  title_gender[-1, ]
+```
+
+
+```{r}
+title_gender_plot <- vl_chart(width = 300, height = 300)|>
+  vl_mark_bar()|>
+  vl_encode_x("Count:Q")|>
+  vl_encode_y("Title:N")|>
+  vl_encode_yOffset("Gender:N")|>
+  vl_encode_color("Gender:N")|>
+  vl_add_data(title_gender)
+title_gender_plot
+  
+```
+
