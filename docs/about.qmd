@@ -1,0 +1,17 @@
+---
+title: "About"
+image: profilepic.png
+about:
+  template: jolla
+  links:
+    - icon: linkedin
+      text: LinkedIn
+      href: https://linkedin.com/
+    - icon: github
+      text: Github
+      href: https://github.com/Cpril
+---
+
+This blog is made as a course project, aiming to explore diversity in science.
+
+All rights reserved. Priscilla Chen

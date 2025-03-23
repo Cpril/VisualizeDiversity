@@ -1,0 +1,17 @@
+---
+title: "I think therefore it's true: The danger of self-perceived objectivity"
+author: "Priscilla Chen"
+date: "2025-02-17"
+categories: [practices]
+image: "image.jpg"
+---
+
+------------------------------------------------------------------------
+
+Study has shown that priming self-preceived objectivity would increase gender discrimination.
+
+------------------------------------------------------------------------
+
+Reference:
+
+Uhlmann, E. L., & Cohen, G. L. (2007). “I think it, therefore it’s true”: Effects of self-preceived objectivity on hiring discrimination. Organizational Behavior and Human Decision Processes, 104(2),207-233. doi:10.1016/j.obhdp.2007.07.001
