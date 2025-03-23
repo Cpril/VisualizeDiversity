@@ -1,13 +1,14 @@
 ---
-title: "Gender Distribution"
+title: "Gender in Faculty and Staff"
 author: "Priscilla Chen"
 date: "2025-02-17"
 categories: [practices]
 image: "image.jpg"
-embed-resources: true
 ---
 
-----------------------------------------------------------------------
+# Gender In Faculty and Staff
+
+
 
 ```{r}
 #| include: false
@@ -23,8 +24,9 @@ library(vegalite)
 ```
 
 ```{r}
-Administration <- read.csv("/rprojects/jc253/VisualizeDiversity/docs/posts/CopyOfObjectivity/Core290_Final(Administration).csv")
-Chairs <- read.csv("/rprojects/jc253/VisualizeDiversity/docs/posts/CopyOfObjectivity/Core290_Final(Chairs+Directors).csv")
+#| include: false
+Administration <- read.csv("/rprojects/jc253/VisualizeDiversity/docs/posts/Gender Distribution/Core290_Final(Administration).csv")
+Chairs <- read.csv("/rprojects/jc253/VisualizeDiversity/docs/posts/Gender Distribution/Core290_Final(Chairs+Directors).csv")
 Chairs <- na.omit(Chairs)
 ```
 ```{r}
