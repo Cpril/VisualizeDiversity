@@ -6,7 +6,8 @@ categories: [practices]
 image: "image.jpg"
 ---
 
-# Gender In Faculty and Staff
+---------------------------------------
+read more
 
 
 
@@ -24,7 +25,6 @@ library(vegalite)
 ```
 
 ```{r}
-#| include: false
 Administration <- read.csv("/rprojects/jc253/VisualizeDiversity/docs/posts/Gender Distribution/Core290_Final(Administration).csv")
 Chairs <- read.csv("/rprojects/jc253/VisualizeDiversity/docs/posts/Gender Distribution/Core290_Final(Chairs+Directors).csv")
 Chairs <- na.omit(Chairs)

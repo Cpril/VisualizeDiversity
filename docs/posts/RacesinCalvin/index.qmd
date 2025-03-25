@@ -1,0 +1,108 @@
+---
+title: "Race and Ethnicity Demographic in Calvin"
+author: "Priscilla Chen"
+date: "2025-03-25"
+categories: [practices]
+image: "image.png"
+---
+
+---------------------------------
+Read More: 
+
+```{r}
+#| include: false
+library(readr)
+library(reticulate)
+library(dplyr)
+library(mosaic)
+library(tidyverse)
+library(tidyr)
+library(vegabrite)
+library(base64enc)
+library(vegalite)
+```
+```{r}
+#| include: false
+percentage <- read.csv("/rprojects/jc253/VisualizeDiversity/docs/posts/RacesinCalvin/Core290_Final(Percentages).csv")
+percentage_minority <- percentage |>
+  mutate(minority_percent = AHANA_percent + International_percent)
+
+faculty <- read.csv("/rprojects/jc253/VisualizeDiversity/docs/posts/RacesinCalvin/Core290_Final(Faculty #).csv")
+
+census <- read.csv("/rprojects/jc253/VisualizeDiversity/docs/posts/RacesinCalvin/Core290_Final(USgeneral).csv")
+  
+```
+
+
+```{r,echo=FALSE}
+US_minority_plot <- vl_chart(width = 260, height = 250, title = "US Racial Minority Representation at Calvin")|>
+  vl_mark_line(point = TRUE)|>
+  vl_encode_x("year:Q", title = "")|>
+  vl_scale_x(zero = FALSE, domainMid = 1997, domainMax = 2019)|>
+  vl_encode_y("AHANA_percent:Q", title = "")|>
+  vl_scale_y(domainMax = 30)|>
+  vl_encode_color("group:N", title = "")|>
+  vl_encode_tooltip_array(list("year", "AHANA_percent"))|>
+  vl_add_data(percentage_minority)
+# US_minority_plot
+```
+```{r,echo=FALSE}
+minority_plot <- vl_chart(width = 260, height = 250, title = "International and Racial Minority at Calvin (%)")|>
+  vl_mark_line(point = TRUE)|>
+  vl_encode_x("year:Q", title = "")|>
+  vl_scale_x(zero = FALSE, domainMid = 1997, domainMax = 2019)|>
+  vl_encode_y("minority_percent:Q", title = "")|>
+  vl_encode_color("group:N", title = "")|>
+  vl_encode_tooltip_array(list("year", "AHANA_percent", "International_percent", "minority_percent"))|>
+  vl_add_data(percentage_minority)
+# minority_plot
+```
+```{r,echo=FALSE}
+race_plot <- vl_hconcat(US_minority_plot, minority_plot)
+race_plot
+```
+
+US Racial Minority measure follows the measure of AHANA. 
+
+AHANA: students or faculty members who identify themselves as African-, Hispanic-, Asian-, or Native-Americans and are U.S. Citizens or permanent residents of the U.S.
+
+
+Since percentages can be prone to error and misinterpretation, I looked into number of faculty who are racial minorities (AHANA) 
+
+```{r,echo=FALSE}
+faculty_minority <- vl_chart(width = 600, height = 100, title = "# of Faculty who are Racial Minority")|>
+  vl_mark_line(point = TRUE)|>
+  vl_encode_x("year:Q", title = "")|>
+  vl_scale_x(zero = FALSE, domainMid = 1997, domainMax = 2019)|>
+  vl_encode_y("AHANA:Q", title = "")|>
+  vl_scale_y(zero = FALSE)|>
+  vl_add_data(faculty)
+faculty_minority
+```
+
+
+```{r, echo=FALSE}
+census <- census|>
+  pivot_longer(cols = c("white","African.American","Hispanic","Asian","Native.American", "Other"), values_to = "Percentage", names_to = "race")
+```
+```{r, echo=FALSE}
+order <- c("white","African.American","Hispanic","Asian","Native.American", "Other")
+vl_chart(width = 580, title = "US Racial and Ethnicity Demographic (% of population)")|>
+  vl_mark_bar()|>
+  vl_encode_y("year:N", title = "")|>
+  vl_encode_x("Percentage:Q", title = "")|>
+  vl_encode_color("race:N", sort = order)|>
+  vl_encode_tooltip_array(list("year", "race", "Percentage"))|>
+  vl_add_data(census)
+```
+
+
+## acknowledgement
+
+Calvin University Datasets used above are collected and maintained by [Calvin Institutional Effectiveness & Analytics team](https://calvin.edu/effectiveness-analytics)
+
+Dataset: 
+
+- [Census Day Report](https://calvincollege.sharepoint.com/sites/ReportsandAnalytics/SitePages/Census-Day-Report.aspx).
+
+- [US census data on Race and Ethnicity]( https://usafacts.org/data/topics/people-society/population-and-demographics/our-changing-population/)
