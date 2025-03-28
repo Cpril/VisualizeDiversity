@@ -23,31 +23,67 @@ library(vegabrite)
 library(base64enc)
 ```
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, warning=FALSE}
 Administration <- read.csv("/rprojects/jc253/VisualizeDiversity/docs/posts/Gender Distribution/Core290_Final(Administration).csv")
 Chairs <- read.csv("/rprojects/jc253/VisualizeDiversity/docs/posts/Gender Distribution/Core290_Final(Chairs+Directors).csv")
 Chairs <- na.omit(Chairs)
 Percentages <- read.csv("/rprojects/jc253/VisualizeDiversity/docs/posts/Gender Distribution/Core290_Final(Percentages).csv")
 Faculty <- read.csv("/rprojects/jc253/VisualizeDiversity/docs/posts/Gender Distribution/Core290_Final(Faculty #).csv")
 ```
-```{r}
-trend <- vl_chart(width = 600, height = 300, title = "Percentage of Female Students/Faculty (%)")|>
-  vl_mark_line(point = TRUE)|>
-  vl_encode_x("year:Q", title = "")|>
-  vl_encode_y("Female_percent:Q", title = "")|>
-  vl_scale_y(zero = FALSE)|>
-  vl_encode_color("group:N", title = "")|>
-  vl_add_data(Percentages)
-trend
-# TODO: add area somehow. One way is to make a line at 50% and shades above and below it.
+
+```{r, echo=FALSE}
+reference_df <- data.frame(
+  year = 1997:2019,
+  group = "Reference",
+  Female_percent = 50
+)
+Percentages <- Percentages |>
+  select(year, group, Female_percent)
+Percentages <- rbind(Percentages, reference_df)
+Percentages <- Percentages |>
+  pivot_wider(names_from = group, values_from = Female_percent)
 ```
-```{r}
+
+
+```{r, echo=FALSE}
+trend_student <- vl_chart(width = 600, height = 300)|>
+  vl_mark_area(point = TRUE, color = "pink")|>
+  vl_encode_x("year:Q", title = "")|>
+   vl_scale_x(zero = FALSE)|>
+  vl_encode_y("student:Q", title = "")|>
+  vl_encode_y2("Reference:Q", title = "")|>
+  vl_scale_y(domainMin = 26)|>
+  vl_add_data(Percentages)
+# trend_student
+```
+
+
+
+```{r, echo=FALSE}
+trend_faculty <- vl_chart(width = 600, height = 300)|>
+  vl_mark_area(point = TRUE, color = "green", opacity = 0.5)|>
+  vl_encode_x("year:Q", title = "")|>
+   vl_scale_x(zero = FALSE)|>
+  vl_encode_y("faculty:Q", title = "")|>
+  vl_encode_y2("Reference:Q", title = "")|>
+  vl_scale_y(domainMax = 60, zero = FALSE)|>
+  vl_add_data(Percentages)
+# trend_faculty
+
+trend_layer <- vl_layer(trend_student, trend_faculty)
+trend_layer <- trend_layer |>
+  vl_add_properties(title = list(
+    text = "Percentage of Female Students/Faculty (%)", 
+    subtitle = "Pink = Students' Female percentage exeeds 50/50 ratio; Green = Faculty's Female percentage fall short of 50/50 ratio"
+  ))
+trend_layer
+```
+
+```{r, echo=FALSE}
 Faculty <- Faculty |>
   select("year", "Female", "Male")|>
   pivot_longer(cols = c("Female", "Male"), values_to = "Percentage", names_to = "Group")
-```
 
-```{r}
 faculty_trend <- vl_chart(width = 600, height = 300, title = "Number of Female and Male Faculty")|>
   vl_mark_line(point = TRUE)|>
   vl_encode_x("year:Q", title = "")|>
@@ -56,11 +92,12 @@ faculty_trend <- vl_chart(width = 600, height = 300, title = "Number of Female a
   vl_encode_color("Group:N", title = "")|>
     vl_scale_y(zero = FALSE)|>
   vl_add_data(Faculty)
+
 faculty_trend
 ```
 
 
-```{r}
+```{r, echo=FALSE}
 # Department and gender
 depart_gender <- Chairs %>%
   group_by(Department, Gender) |>
@@ -74,34 +111,37 @@ depart_gender <-
 sort_order <- list("Health", "Humanities", "Business", "Education", "STEM")
 depart_gender_plot <- vl_chart(width = 300, height = 300)|>
   vl_mark_bar()|>
-  vl_encode_x("Count:Q", title = "Number of Department Leadership")|>
+  vl_encode_x("Count:Q", title = "")|>
   vl_encode_y("Department:N", title = "", sort = sort_order)|>
   vl_encode_yOffset("Gender:N")|>
   vl_encode_color("Gender:N", title = "")|>
   vl_add_data(depart_gender)
-depart_gender_plot
-```
+# depart_gender_plot
 
-
-```{r}
 # Gender and title
 title_gender <- Chairs |>
   group_by(Title, Gender)|>
   summarise(Count = n(), .groups = "drop")
 title_gender <-
   title_gender[-1, ]
-```
 
-
-```{r}
 title_gender_plot <- vl_chart(width = 300, height = 300)|>
   vl_mark_bar()|>
-  vl_encode_x("Count:Q")|>
+  vl_encode_x("Count:Q", title = "")|>
   vl_encode_y("Title:N", title = "")|>
   vl_encode_yOffset("Gender:N")|>
   vl_encode_color("Gender:N")|>
   vl_add_data(title_gender)
-title_gender_plot
+# title_gender_plot
   
+
+leader_gender <- vl_hconcat(depart_gender_plot, title_gender_plot)
+leader_gender <- leader_gender|>
+  vl_add_properties(title = list(
+    text = "Gender Distribution in Faculty Leadership", 
+    subtitle = "Left: grouped by department; Right: grouped by title."
+  ))
+leader_gender
 ```
+
 
