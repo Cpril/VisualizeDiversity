@@ -12,6 +12,8 @@ about:
       href: https://github.com/Cpril
 ---
 
-This blog is made as a course project, aiming to explore diversity in science.
+This blog was created for CORE 290: Minority Voices in Science, with the goal of exploring and examining minority representation at Calvin University.
 
-All rights reserved. Priscilla Chen
+**All rights reserved.** Priscilla Chen
+
+Interested in ther data visualization and data-driven analysis, check out [Cpril]("https://github.com/Cpril") at Github. 

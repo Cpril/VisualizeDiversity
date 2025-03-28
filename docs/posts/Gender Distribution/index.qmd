@@ -21,14 +21,45 @@ library(tidyverse)
 library(tidyr)
 library(vegabrite)
 library(base64enc)
-library(vegalite)
 ```
 
-```{r}
+```{r, echo=FALSE}
 Administration <- read.csv("/rprojects/jc253/VisualizeDiversity/docs/posts/Gender Distribution/Core290_Final(Administration).csv")
 Chairs <- read.csv("/rprojects/jc253/VisualizeDiversity/docs/posts/Gender Distribution/Core290_Final(Chairs+Directors).csv")
 Chairs <- na.omit(Chairs)
+Percentages <- read.csv("/rprojects/jc253/VisualizeDiversity/docs/posts/Gender Distribution/Core290_Final(Percentages).csv")
+Faculty <- read.csv("/rprojects/jc253/VisualizeDiversity/docs/posts/Gender Distribution/Core290_Final(Faculty #).csv")
 ```
+```{r}
+trend <- vl_chart(width = 600, height = 300, title = "Percentage of Female Students/Faculty (%)")|>
+  vl_mark_line(point = TRUE)|>
+  vl_encode_x("year:Q", title = "")|>
+  vl_encode_y("Female_percent:Q", title = "")|>
+  vl_scale_y(zero = FALSE)|>
+  vl_encode_color("group:N", title = "")|>
+  vl_add_data(Percentages)
+trend
+# TODO: add area somehow. One way is to make a line at 50% and shades above and below it.
+```
+```{r}
+Faculty <- Faculty |>
+  select("year", "Female", "Male")|>
+  pivot_longer(cols = c("Female", "Male"), values_to = "Percentage", names_to = "Group")
+```
+
+```{r}
+faculty_trend <- vl_chart(width = 600, height = 300, title = "Number of Female and Male Faculty")|>
+  vl_mark_line(point = TRUE)|>
+  vl_encode_x("year:Q", title = "")|>
+    vl_scale_x(zero = FALSE)|>
+  vl_encode_y("Percentage:Q", title = "")|>
+  vl_encode_color("Group:N", title = "")|>
+    vl_scale_y(zero = FALSE)|>
+  vl_add_data(Faculty)
+faculty_trend
+```
+
+
 ```{r}
 # Department and gender
 depart_gender <- Chairs %>%
@@ -66,7 +97,7 @@ title_gender <-
 title_gender_plot <- vl_chart(width = 300, height = 300)|>
   vl_mark_bar()|>
   vl_encode_x("Count:Q")|>
-  vl_encode_y("Title:N")|>
+  vl_encode_y("Title:N", title = "")|>
   vl_encode_yOffset("Gender:N")|>
   vl_encode_color("Gender:N")|>
   vl_add_data(title_gender)

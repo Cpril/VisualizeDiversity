@@ -192,33 +192,742 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 <p>read more</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Administration <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"/rprojects/jc253/VisualizeDiversity/docs/posts/Gender Distribution/Core290_Final(Administration).csv"</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Chairs <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"/rprojects/jc253/VisualizeDiversity/docs/posts/Gender Distribution/Core290_Final(Chairs+Directors).csv"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>Chairs <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(Chairs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>trend <span class="ot">&lt;-</span> <span class="fu">vl_chart</span>(<span class="at">width =</span> <span class="dv">600</span>, <span class="at">height =</span> <span class="dv">300</span>, <span class="at">title =</span> <span class="st">"Percentage of Female Students/Faculty (%)"</span>)<span class="sc">|&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_mark_line</span>(<span class="at">point =</span> <span class="cn">TRUE</span>)<span class="sc">|&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_encode_x</span>(<span class="st">"year:Q"</span>, <span class="at">title =</span> <span class="st">""</span>)<span class="sc">|&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_encode_y</span>(<span class="st">"Female_percent:Q"</span>, <span class="at">title =</span> <span class="st">""</span>)<span class="sc">|&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_scale_y</span>(<span class="at">zero =</span> <span class="cn">FALSE</span>)<span class="sc">|&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_encode_color</span>(<span class="st">"group:N"</span>, <span class="at">title =</span> <span class="st">""</span>)<span class="sc">|&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_add_data</span>(Percentages)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>trend</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="htmlwidget-b46b3a6c00ad85c4a68c" style="width:auto;height:auto;" class="vegawidget-vl5 html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b46b3a6c00ad85c4a68c">{"x":{
+  "chart_spec": {
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "height": 300,
+    "title": "Percentage of Female Students/Faculty (%)",
+    "width": 600,
+    "mark": {
+      "point": true,
+      "type": "line"
+    },
+    "encoding": {
+      "x": {
+        "field": "year",
+        "title": "",
+        "type": "quantitative"
+      },
+      "y": {
+        "field": "Female_percent",
+        "title": "",
+        "type": "quantitative",
+        "scale": {
+          "zero": false
+        }
+      },
+      "color": {
+        "field": "group",
+        "title": "",
+        "type": "nominal"
+      }
+    },
+    "data": {
+      "values": [
+        {
+          "year": 1997,
+          "group": "student",
+          "AHANA_percent": 3.7,
+          "International_percent": 2.5,
+          "Female_percent": 56.7,
+          "Male_percent": 43.3
+        },
+        {
+          "year": 1998,
+          "group": "student",
+          "AHANA_percent": 3.8,
+          "International_percent": 2.8,
+          "Female_percent": 55.8,
+          "Male_percent": 44.2
+        },
+        {
+          "year": 1999,
+          "group": "student",
+          "AHANA_percent": 4.1,
+          "International_percent": 3,
+          "Female_percent": 55.7,
+          "Male_percent": 44.3
+        },
+        {
+          "year": 1997,
+          "group": "faculty",
+          "AHANA_percent": 5,
+          "International_percent": 0,
+          "Female_percent": 26.7,
+          "Male_percent": 73.3
+        },
+        {
+          "year": 1998,
+          "group": "faculty",
+          "AHANA_percent": 4.5,
+          "International_percent": 0,
+          "Female_percent": 27.5,
+          "Male_percent": 72.5
+        },
+        {
+          "year": 1999,
+          "group": "faculty",
+          "AHANA_percent": 4.7,
+          "International_percent": 0,
+          "Female_percent": 31.3,
+          "Male_percent": 68.7
+        },
+        {
+          "year": 2000,
+          "group": "student",
+          "AHANA_percent": 4.2,
+          "International_percent": 3.5,
+          "Female_percent": 55.8,
+          "Male_percent": 44.2
+        },
+        {
+          "year": 2001,
+          "group": "student",
+          "AHANA_percent": 5,
+          "International_percent": 4.3,
+          "Female_percent": 56.2,
+          "Male_percent": 43.8
+        },
+        {
+          "year": 2002,
+          "group": "student",
+          "AHANA_percent": 4.3,
+          "International_percent": 4.2,
+          "Female_percent": 56.6,
+          "Male_percent": 43.4
+        },
+        {
+          "year": 2003,
+          "group": "student",
+          "AHANA_percent": 4.6,
+          "International_percent": 4.5,
+          "Female_percent": 56,
+          "Male_percent": 44
+        },
+        {
+          "year": 2004,
+          "group": "student",
+          "AHANA_percent": 5.3,
+          "International_percent": 5.1,
+          "Female_percent": 54.6,
+          "Male_percent": 45.4
+        },
+        {
+          "year": 2005,
+          "group": "student",
+          "AHANA_percent": 5.4,
+          "International_percent": 4.5,
+          "Female_percent": 54.3,
+          "Male_percent": 45.7
+        },
+        {
+          "year": 2006,
+          "group": "student",
+          "AHANA_percent": 5.6,
+          "International_percent": 4.5,
+          "Female_percent": 53.9,
+          "Male_percent": 46.1
+        },
+        {
+          "year": 2007,
+          "group": "student",
+          "AHANA_percent": 6.3,
+          "International_percent": 4.5,
+          "Female_percent": 54,
+          "Male_percent": 46
+        },
+        {
+          "year": 2008,
+          "group": "student",
+          "AHANA_percent": 6.4,
+          "International_percent": 4.8,
+          "Female_percent": 54.5,
+          "Male_percent": 45.5
+        },
+        {
+          "year": 2009,
+          "group": "student",
+          "AHANA_percent": 7.3,
+          "International_percent": 5.9,
+          "Female_percent": 54,
+          "Male_percent": 46
+        },
+        {
+          "year": 2000,
+          "group": "faculty",
+          "AHANA_percent": 5.3,
+          "International_percent": 0,
+          "Female_percent": 29.6,
+          "Male_percent": 70.4
+        },
+        {
+          "year": 2001,
+          "group": "faculty",
+          "AHANA_percent": 5.3,
+          "International_percent": 0,
+          "Female_percent": 31.7,
+          "Male_percent": 68.3
+        },
+        {
+          "year": 2002,
+          "group": "faculty",
+          "AHANA_percent": 6.5,
+          "International_percent": 0,
+          "Female_percent": 31.6,
+          "Male_percent": 68.4
+        },
+        {
+          "year": 2003,
+          "group": "faculty",
+          "AHANA_percent": 6.9,
+          "International_percent": 0,
+          "Female_percent": 30.2,
+          "Male_percent": 69.8
+        },
+        {
+          "year": 2004,
+          "group": "faculty",
+          "AHANA_percent": 6.5,
+          "International_percent": 0,
+          "Female_percent": 29.6,
+          "Male_percent": 70.4
+        },
+        {
+          "year": 2005,
+          "group": "faculty",
+          "AHANA_percent": 7.1,
+          "International_percent": 0,
+          "Female_percent": 31.7,
+          "Male_percent": 68.3
+        },
+        {
+          "year": 2006,
+          "group": "faculty",
+          "AHANA_percent": 7.3,
+          "International_percent": 0,
+          "Female_percent": 31.3,
+          "Male_percent": 68.1
+        },
+        {
+          "year": 2007,
+          "group": "faculty",
+          "AHANA_percent": 7.1,
+          "International_percent": 0,
+          "Female_percent": 32.3,
+          "Male_percent": 67.7
+        },
+        {
+          "year": 2008,
+          "group": "faculty",
+          "AHANA_percent": 8.8,
+          "International_percent": 0,
+          "Female_percent": 32.5,
+          "Male_percent": 67.5
+        },
+        {
+          "year": 2009,
+          "group": "faculty",
+          "AHANA_percent": 9.8,
+          "International_percent": 0,
+          "Female_percent": 34,
+          "Male_percent": 66
+        },
+        {
+          "year": 2010,
+          "group": "student",
+          "AHANA_percent": 9.7,
+          "International_percent": 8.7,
+          "Female_percent": 53.4,
+          "Male_percent": 46.6
+        },
+        {
+          "year": 2011,
+          "group": "student",
+          "AHANA_percent": 11.4,
+          "International_percent": 9.5,
+          "Female_percent": 53.3,
+          "Male_percent": 46.7
+        },
+        {
+          "year": 2012,
+          "group": "student",
+          "AHANA_percent": 11.8,
+          "International_percent": 10.1,
+          "Female_percent": 53.9,
+          "Male_percent": 46.1
+        },
+        {
+          "year": 2013,
+          "group": "student",
+          "AHANA_percent": 13,
+          "International_percent": 10.1,
+          "Female_percent": 55.1,
+          "Male_percent": 44.9
+        },
+        {
+          "year": 2014,
+          "group": "student",
+          "AHANA_percent": 13.1,
+          "International_percent": 10.6,
+          "Female_percent": 55.4,
+          "Male_percent": 44.6
+        },
+        {
+          "year": 2015,
+          "group": "student",
+          "AHANA_percent": 14.2,
+          "International_percent": 10.3,
+          "Female_percent": 55.9,
+          "Male_percent": 44.1
+        },
+        {
+          "year": 2016,
+          "group": "student",
+          "AHANA_percent": 14.7,
+          "International_percent": 10.6,
+          "Female_percent": 54.8,
+          "Male_percent": 45.2
+        },
+        {
+          "year": 2017,
+          "group": "student",
+          "AHANA_percent": 16.2,
+          "International_percent": 11.8,
+          "Female_percent": 54.3,
+          "Male_percent": 45.7
+        },
+        {
+          "year": 2018,
+          "group": "student",
+          "AHANA_percent": 16.9,
+          "International_percent": 12.2,
+          "Female_percent": 54,
+          "Male_percent": 46
+        },
+        {
+          "year": 2019,
+          "group": "student",
+          "AHANA_percent": 16.8,
+          "International_percent": 12.7,
+          "Female_percent": 53.6,
+          "Male_percent": 46.4
+        },
+        {
+          "year": 2010,
+          "group": "faculty",
+          "AHANA_percent": 10,
+          "International_percent": 0,
+          "Female_percent": 33.9,
+          "Male_percent": 66.1
+        },
+        {
+          "year": 2011,
+          "group": "faculty",
+          "AHANA_percent": 9.9,
+          "International_percent": 0,
+          "Female_percent": 35.3,
+          "Male_percent": 64.7
+        },
+        {
+          "year": 2012,
+          "group": "faculty",
+          "AHANA_percent": 9.9,
+          "International_percent": 0,
+          "Female_percent": 34.8,
+          "Male_percent": 65.2
+        },
+        {
+          "year": 2013,
+          "group": "faculty",
+          "AHANA_percent": 8.2,
+          "International_percent": 0,
+          "Female_percent": 35.4,
+          "Male_percent": 64.6
+        },
+        {
+          "year": 2014,
+          "group": "faculty",
+          "AHANA_percent": 9.8,
+          "International_percent": 0,
+          "Female_percent": 34.9,
+          "Male_percent": 65.1
+        },
+        {
+          "year": 2015,
+          "group": "faculty",
+          "AHANA_percent": 10.3,
+          "International_percent": 0,
+          "Female_percent": 35.9,
+          "Male_percent": 64.1
+        },
+        {
+          "year": 2016,
+          "group": "faculty",
+          "AHANA_percent": 9.9,
+          "International_percent": 0,
+          "Female_percent": 36.1,
+          "Male_percent": 63.9
+        },
+        {
+          "year": 2017,
+          "group": "faculty",
+          "AHANA_percent": 9.8,
+          "International_percent": 0,
+          "Female_percent": 34.1,
+          "Male_percent": 65.9
+        },
+        {
+          "year": 2018,
+          "group": "faculty",
+          "AHANA_percent": 9.5,
+          "International_percent": 0,
+          "Female_percent": 36.2,
+          "Male_percent": 63.8
+        },
+        {
+          "year": 2019,
+          "group": "faculty",
+          "AHANA_percent": 9.4,
+          "International_percent": 0,
+          "Female_percent": 37.1,
+          "Male_percent": 62.9
+        }
+      ]
+    }
+  },
+  "embed_options": {
+    "renderer": "canvas",
+    "defaultStyle": true
+  }
+},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: add area somehow. One way is to make a line at 50% and shades above and below it.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Department and gender</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>depart_gender <span class="ot">&lt;-</span> Chairs <span class="sc">%&gt;%</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Department, Gender) <span class="sc">|&gt;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">'drop'</span>)<span class="sc">|&gt;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Department =</span> <span class="fu">ifelse</span>(Department <span class="sc">==</span> <span class="st">"School of Humanities, Arts, and Social Sciences"</span>, </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"School of Humanities"</span>, Department))<span class="sc">|&gt;</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Department =</span> <span class="fu">gsub</span>(<span class="st">"School of "</span>, <span class="st">""</span>, Department))</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>depart_gender <span class="ot">&lt;-</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  depart_gender[<span class="sc">-</span><span class="dv">1</span>, ]</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>sort_order <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">"Health"</span>, <span class="st">"Humanities"</span>, <span class="st">"Business"</span>, <span class="st">"Education"</span>, <span class="st">"STEM"</span>)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>depart_gender_plot <span class="ot">&lt;-</span> <span class="fu">vl_chart</span>(<span class="at">width =</span> <span class="dv">300</span>, <span class="at">height =</span> <span class="dv">300</span>)<span class="sc">|&gt;</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_mark_bar</span>()<span class="sc">|&gt;</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_encode_x</span>(<span class="st">"Count:Q"</span>, <span class="at">title =</span> <span class="st">"Number of Department Leadership"</span>)<span class="sc">|&gt;</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_encode_y</span>(<span class="st">"Department:N"</span>, <span class="at">title =</span> <span class="st">""</span>, <span class="at">sort =</span> sort_order)<span class="sc">|&gt;</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_encode_yOffset</span>(<span class="st">"Gender:N"</span>)<span class="sc">|&gt;</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_encode_color</span>(<span class="st">"Gender:N"</span>, <span class="at">title =</span> <span class="st">""</span>)<span class="sc">|&gt;</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_add_data</span>(depart_gender)</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>depart_gender_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Faculty <span class="ot">&lt;-</span> Faculty <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">"year"</span>, <span class="st">"Female"</span>, <span class="st">"Male"</span>)<span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>), <span class="at">values_to =</span> <span class="st">"Percentage"</span>, <span class="at">names_to =</span> <span class="st">"Group"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>faculty_trend <span class="ot">&lt;-</span> <span class="fu">vl_chart</span>(<span class="at">width =</span> <span class="dv">600</span>, <span class="at">height =</span> <span class="dv">300</span>, <span class="at">title =</span> <span class="st">"Number of Female and Male Faculty"</span>)<span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_mark_line</span>(<span class="at">point =</span> <span class="cn">TRUE</span>)<span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_encode_x</span>(<span class="st">"year:Q"</span>, <span class="at">title =</span> <span class="st">""</span>)<span class="sc">|&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vl_scale_x</span>(<span class="at">zero =</span> <span class="cn">FALSE</span>)<span class="sc">|&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_encode_y</span>(<span class="st">"Percentage:Q"</span>, <span class="at">title =</span> <span class="st">""</span>)<span class="sc">|&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_encode_color</span>(<span class="st">"Group:N"</span>, <span class="at">title =</span> <span class="st">""</span>)<span class="sc">|&gt;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">vl_scale_y</span>(<span class="at">zero =</span> <span class="cn">FALSE</span>)<span class="sc">|&gt;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_add_data</span>(Faculty)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>faculty_trend</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="htmlwidget-0abbf48776315a7d0fd6" style="width:auto;height:auto;" class="vegawidget-vl5 html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0abbf48776315a7d0fd6">{"x":{
+<div id="htmlwidget-1ea2d34bb1a2182f9ecd" style="width:auto;height:auto;" class="vegawidget-vl5 html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1ea2d34bb1a2182f9ecd">{"x":{
+  "chart_spec": {
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "height": 300,
+    "title": "Number of Female and Male Faculty",
+    "width": 600,
+    "mark": {
+      "point": true,
+      "type": "line"
+    },
+    "encoding": {
+      "x": {
+        "field": "year",
+        "title": "",
+        "type": "quantitative",
+        "scale": {
+          "zero": false
+        }
+      },
+      "y": {
+        "field": "Percentage",
+        "title": "",
+        "type": "quantitative",
+        "scale": {
+          "zero": false
+        }
+      },
+      "color": {
+        "field": "Group",
+        "title": "",
+        "type": "nominal"
+      }
+    },
+    "data": {
+      "values": [
+        {
+          "year": 1997,
+          "Group": "Female",
+          "Percentage": 70
+        },
+        {
+          "year": 1997,
+          "Group": "Male",
+          "Percentage": 192
+        },
+        {
+          "year": 1998,
+          "Group": "Female",
+          "Percentage": 74
+        },
+        {
+          "year": 1998,
+          "Group": "Male",
+          "Percentage": 185
+        },
+        {
+          "year": 1999,
+          "Group": "Female",
+          "Percentage": 87
+        },
+        {
+          "year": 1999,
+          "Group": "Male",
+          "Percentage": 191
+        },
+        {
+          "year": 2000,
+          "Group": "Female",
+          "Percentage": 84
+        },
+        {
+          "year": 2000,
+          "Group": "Male",
+          "Percentage": 200
+        },
+        {
+          "year": 2001,
+          "Group": "Female",
+          "Percentage": 90
+        },
+        {
+          "year": 2001,
+          "Group": "Male",
+          "Percentage": 194
+        },
+        {
+          "year": 2002,
+          "Group": "Female",
+          "Percentage": 92
+        },
+        {
+          "year": 2002,
+          "Group": "Male",
+          "Percentage": 199
+        },
+        {
+          "year": 2003,
+          "Group": "Female",
+          "Percentage": 92
+        },
+        {
+          "year": 2003,
+          "Group": "Male",
+          "Percentage": 213
+        },
+        {
+          "year": 2004,
+          "Group": "Female",
+          "Percentage": 91
+        },
+        {
+          "year": 2004,
+          "Group": "Male",
+          "Percentage": 216
+        },
+        {
+          "year": 2005,
+          "Group": "Female",
+          "Percentage": 98
+        },
+        {
+          "year": 2005,
+          "Group": "Male",
+          "Percentage": 211
+        },
+        {
+          "year": 2006,
+          "Group": "Female",
+          "Percentage": 98
+        },
+        {
+          "year": 2006,
+          "Group": "Male",
+          "Percentage": 213
+        },
+        {
+          "year": 2007,
+          "Group": "Female",
+          "Percentage": 104
+        },
+        {
+          "year": 2007,
+          "Group": "Male",
+          "Percentage": 218
+        },
+        {
+          "year": 2008,
+          "Group": "Female",
+          "Percentage": 104
+        },
+        {
+          "year": 2008,
+          "Group": "Male",
+          "Percentage": 216
+        },
+        {
+          "year": 2009,
+          "Group": "Female",
+          "Percentage": 111
+        },
+        {
+          "year": 2009,
+          "Group": "Male",
+          "Percentage": 215
+        },
+        {
+          "year": 2010,
+          "Group": "Female",
+          "Percentage": 108
+        },
+        {
+          "year": 2010,
+          "Group": "Male",
+          "Percentage": 211
+        },
+        {
+          "year": 2011,
+          "Group": "Female",
+          "Percentage": 110
+        },
+        {
+          "year": 2011,
+          "Group": "Male",
+          "Percentage": 202
+        },
+        {
+          "year": 2012,
+          "Group": "Female",
+          "Percentage": 105
+        },
+        {
+          "year": 2012,
+          "Group": "Male",
+          "Percentage": 197
+        },
+        {
+          "year": 2013,
+          "Group": "Female",
+          "Percentage": 103
+        },
+        {
+          "year": 2013,
+          "Group": "Male",
+          "Percentage": 188
+        },
+        {
+          "year": 2014,
+          "Group": "Female",
+          "Percentage": 96
+        },
+        {
+          "year": 2014,
+          "Group": "Male",
+          "Percentage": 179
+        },
+        {
+          "year": 2015,
+          "Group": "Female",
+          "Percentage": 94
+        },
+        {
+          "year": 2015,
+          "Group": "Male",
+          "Percentage": 168
+        },
+        {
+          "year": 2016,
+          "Group": "Female",
+          "Percentage": 91
+        },
+        {
+          "year": 2016,
+          "Group": "Male",
+          "Percentage": 161
+        },
+        {
+          "year": 2017,
+          "Group": "Female",
+          "Percentage": 84
+        },
+        {
+          "year": 2017,
+          "Group": "Male",
+          "Percentage": 162
+        },
+        {
+          "year": 2018,
+          "Group": "Female",
+          "Percentage": 84
+        },
+        {
+          "year": 2018,
+          "Group": "Male",
+          "Percentage": 148
+        },
+        {
+          "year": 2019,
+          "Group": "Female",
+          "Percentage": 83
+        },
+        {
+          "year": 2019,
+          "Group": "Male",
+          "Percentage": 141
+        }
+      ]
+    }
+  },
+  "embed_options": {
+    "renderer": "canvas",
+    "defaultStyle": true
+  }
+},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Department and gender</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>depart_gender <span class="ot">&lt;-</span> Chairs <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Department, Gender) <span class="sc">|&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">'drop'</span>)<span class="sc">|&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Department =</span> <span class="fu">ifelse</span>(Department <span class="sc">==</span> <span class="st">"School of Humanities, Arts, and Social Sciences"</span>, </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"School of Humanities"</span>, Department))<span class="sc">|&gt;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Department =</span> <span class="fu">gsub</span>(<span class="st">"School of "</span>, <span class="st">""</span>, Department))</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>depart_gender <span class="ot">&lt;-</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  depart_gender[<span class="sc">-</span><span class="dv">1</span>, ]</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>sort_order <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">"Health"</span>, <span class="st">"Humanities"</span>, <span class="st">"Business"</span>, <span class="st">"Education"</span>, <span class="st">"STEM"</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>depart_gender_plot <span class="ot">&lt;-</span> <span class="fu">vl_chart</span>(<span class="at">width =</span> <span class="dv">300</span>, <span class="at">height =</span> <span class="dv">300</span>)<span class="sc">|&gt;</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_mark_bar</span>()<span class="sc">|&gt;</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_encode_x</span>(<span class="st">"Count:Q"</span>, <span class="at">title =</span> <span class="st">"Number of Department Leadership"</span>)<span class="sc">|&gt;</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_encode_y</span>(<span class="st">"Department:N"</span>, <span class="at">title =</span> <span class="st">""</span>, <span class="at">sort =</span> sort_order)<span class="sc">|&gt;</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_encode_yOffset</span>(<span class="st">"Gender:N"</span>)<span class="sc">|&gt;</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_encode_color</span>(<span class="st">"Gender:N"</span>, <span class="at">title =</span> <span class="st">""</span>)<span class="sc">|&gt;</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_add_data</span>(depart_gender)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>depart_gender_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="htmlwidget-7cd7d62dee26fe2d11db" style="width:auto;height:auto;" class="vegawidget-vl5 html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7cd7d62dee26fe2d11db">{"x":{
   "chart_spec": {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "height": 300,
@@ -317,25 +1026,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gender and title</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>title_gender <span class="ot">&lt;-</span> Chairs <span class="sc">|&gt;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Title, Gender)<span class="sc">|&gt;</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>title_gender <span class="ot">&lt;-</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  title_gender[<span class="sc">-</span><span class="dv">1</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gender and title</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>title_gender <span class="ot">&lt;-</span> Chairs <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Title, Gender)<span class="sc">|&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Count =</span> <span class="fu">n</span>(), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>title_gender <span class="ot">&lt;-</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  title_gender[<span class="sc">-</span><span class="dv">1</span>, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>title_gender_plot <span class="ot">&lt;-</span> <span class="fu">vl_chart</span>(<span class="at">width =</span> <span class="dv">300</span>, <span class="at">height =</span> <span class="dv">300</span>)<span class="sc">|&gt;</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_mark_bar</span>()<span class="sc">|&gt;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_encode_x</span>(<span class="st">"Count:Q"</span>)<span class="sc">|&gt;</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_encode_y</span>(<span class="st">"Title:N"</span>)<span class="sc">|&gt;</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_encode_yOffset</span>(<span class="st">"Gender:N"</span>)<span class="sc">|&gt;</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_encode_color</span>(<span class="st">"Gender:N"</span>)<span class="sc">|&gt;</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_add_data</span>(title_gender)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>title_gender_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>title_gender_plot <span class="ot">&lt;-</span> <span class="fu">vl_chart</span>(<span class="at">width =</span> <span class="dv">300</span>, <span class="at">height =</span> <span class="dv">300</span>)<span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_mark_bar</span>()<span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_encode_x</span>(<span class="st">"Count:Q"</span>)<span class="sc">|&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_encode_y</span>(<span class="st">"Title:N"</span>, <span class="at">title =</span> <span class="st">""</span>)<span class="sc">|&gt;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_encode_yOffset</span>(<span class="st">"Gender:N"</span>)<span class="sc">|&gt;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_encode_color</span>(<span class="st">"Gender:N"</span>)<span class="sc">|&gt;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">vl_add_data</span>(title_gender)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>title_gender_plot</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="htmlwidget-c461f0d4433844ad8c0c" style="width:auto;height:auto;" class="vegawidget-vl5 html-widget"></div>
-<script type="application/json" data-for="htmlwidget-c461f0d4433844ad8c0c">{"x":{
+<div id="htmlwidget-206a947db97e4da171c5" style="width:auto;height:auto;" class="vegawidget-vl5 html-widget"></div>
+<script type="application/json" data-for="htmlwidget-206a947db97e4da171c5">{"x":{
   "chart_spec": {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "height": 300,
@@ -350,6 +1059,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       },
       "y": {
         "field": "Title",
+        "title": "",
         "type": "nominal"
       },
       "yOffset": {

@@ -2,12 +2,11 @@
 title: "Race and Ethnicity Demographic in Calvin"
 author: "Priscilla Chen"
 date: "2025-03-25"
-categories: [practices]
+categories: [analysis]
 image: "image.png"
 ---
 
----------------------------------
-Read More: 
+Calvin University is becoming more diverse, with a significant increase in student diversity; however, it hasn't yet reached the broader US demographic composition.
 
 ```{r}
 #| include: false
@@ -21,6 +20,10 @@ library(vegabrite)
 library(base64enc)
 library(vegalite)
 ```
+
+According to data from Calvin's Institutional Effectiveness & Analytics team, the representation of U.S. minority students has increased fivefold, from 3.7% of the student body in 1997 to 16.8% in 2019. Faculty diversity has also grown. However, minority faculty representation initially exceeded that of students, but after 2009, its growth stagnated, and by 2010, it was surpassed by the rapidly increasing student minority representation. 
+
+<text> </text>
 ```{r}
 #| include: false
 percentage <- read.csv("/rprojects/jc253/VisualizeDiversity/docs/posts/RacesinCalvin/Core290_Final(Percentages).csv")
@@ -33,9 +36,8 @@ census <- read.csv("/rprojects/jc253/VisualizeDiversity/docs/posts/RacesinCalvin
   
 ```
 
-
 ```{r,echo=FALSE}
-US_minority_plot <- vl_chart(width = 260, height = 250, title = "US Racial Minority Representation at Calvin")|>
+US_minority_plot <- vl_chart(width = 260, height = 250, title = "US Racial Minority Rate at Calvin (%)")|>
   vl_mark_line(point = TRUE)|>
   vl_encode_x("year:Q", title = "")|>
   vl_scale_x(zero = FALSE, domainMid = 1997, domainMax = 2019)|>
@@ -43,6 +45,12 @@ US_minority_plot <- vl_chart(width = 260, height = 250, title = "US Racial Minor
   vl_scale_y(domainMax = 30)|>
   vl_encode_color("group:N", title = "")|>
   vl_encode_tooltip_array(list("year", "AHANA_percent"))|>
+  vl_add_interval_selection(
+    name = "panzoom", 
+    bind = "scales",  encodings = c("y","x"), 
+    resolve = "global",   
+    translate = TRUE,   
+    zoom = TRUE)|>         
   vl_add_data(percentage_minority)
 # US_minority_plot
 ```
@@ -54,6 +62,14 @@ minority_plot <- vl_chart(width = 260, height = 250, title = "International and 
   vl_encode_y("minority_percent:Q", title = "")|>
   vl_encode_color("group:N", title = "")|>
   vl_encode_tooltip_array(list("year", "AHANA_percent", "International_percent", "minority_percent"))|>
+  vl_add_interval_selection(
+    name = "panzoom", 
+
+    bind = "scales",  encodings = c("y","x"), 
+
+    resolve = "global",   
+    translate = TRUE,     
+    zoom = TRUE)|>          
   vl_add_data(percentage_minority)
 # minority_plot
 ```
@@ -61,13 +77,20 @@ minority_plot <- vl_chart(width = 260, height = 250, title = "International and 
 race_plot <- vl_hconcat(US_minority_plot, minority_plot)
 race_plot
 ```
+<small><strong>NOTES: US Racial Minority measures students or faculty members who identify themselves as African-, Hispanic-, Asian-, or Native-Americans and are U.S. Citizens or permanent residents of the U.S
+</strong></small>
 
-US Racial Minority measure follows the measure of AHANA. 
+<small><strong>ZOOM to interact with visualization.
+</strong></small>
 
-AHANA: students or faculty members who identify themselves as African-, Hispanic-, Asian-, or Native-Americans and are U.S. Citizens or permanent residents of the U.S.
+<text> </text>
+
+Calvin University has welcomed international students since 1997. Their representation grew exponentially from 2.5% of the student body in 1997 to 12.7% in 2019. Notably, both domestic minority and international student enrollment experienced a sharp increase beginning in 2008.  
+
+Another potential interesting insight is that a growth in faculty minority representation is often followed by a growth in student minority representation one years later. For example, faculty minority rate experienced an increase from 2001 to 2003, and student minority rate experienced an increase from 2002 to 2004. Faculty minority rate experienced a sharp increase from 2007 to 2009, and student minority rate experienced a sharp increase from 2008 to 2010. 
 
 
-Since percentages can be prone to error and misinterpretation, I looked into number of faculty who are racial minorities (AHANA) 
+Percentage of faculty minority rates are stagnate, therefore I looked into the faculty minority numbers. Data suggests Calvin gains faculty members who are minority races steadily from 1998 to 2009, but starts to lose minority faculty since 2010. 
 
 ```{r,echo=FALSE}
 faculty_minority <- vl_chart(width = 600, height = 100, title = "# of Faculty who are Racial Minority")|>
@@ -76,10 +99,14 @@ faculty_minority <- vl_chart(width = 600, height = 100, title = "# of Faculty wh
   vl_scale_x(zero = FALSE, domainMid = 1997, domainMax = 2019)|>
   vl_encode_y("AHANA:Q", title = "")|>
   vl_scale_y(zero = FALSE)|>
+  vl_encode_tooltip_array(list("year", "AHANA"))|>
   vl_add_data(faculty)
 faculty_minority
 ```
+<small><strong>NOTES: Data shows only CURRENT, FULL-TIME faculty, does not include part-time lecturer or emeriti.  
+</strong></small>
 
+While Calvin University has become more diverse since 1997, it has not reached the deomographic composition of US population. In 2010, US minorities contribute to 36.2% of US population; and this number increased to 41.1% in 2020. 
 
 ```{r, echo=FALSE}
 census <- census|>
@@ -96,6 +123,11 @@ vl_chart(width = 580, title = "US Racial and Ethnicity Demographic (% of populat
   vl_add_data(census)
 ```
 
+<text> </text>
+
+Limitations of this analysis include the absence of data beyond 2019. Future research could explore trends in faculty and student minority representation during and after the COVID-19 pandemic. Additionally, examining the factors contributing to the decline in minority faculty representation could be valuable. Finally, while this analysis suggests a potential relationship between faculty and student minority representation, further research is needed to confirm this trend.
+
+<text> </text>
 
 ## acknowledgement
 

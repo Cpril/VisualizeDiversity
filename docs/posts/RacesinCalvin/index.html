@@ -118,7 +118,7 @@ ul.task-list li input[type="checkbox"] {
     <div class="quarto-title column-body">
       <h1 class="title">Race and Ethnicity Demographic in Calvin</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">practices</div>
+                <div class="quarto-category">analysis</div>
               </div>
                   </div>
   </div>
@@ -155,18 +155,19 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<hr>
-<p>Read More:</p>
+<p>Calvin University is becoming more diverse, with a significant increase in student diversity; however, it hasn’t yet reached the broader US demographic composition.</p>
+<p>According to data from Calvin’s Institutional Effectiveness &amp; Analytics team, the representation of U.S. minority students has increased fivefold, from 3.7% of the student body in 1997 to 16.8% in 2019. Faculty diversity has also grown. However, minority faculty representation initially exceeded that of students, but after 2009, its growth stagnated, and by 2010, it was surpassed by the rapidly increasing student minority representation.</p>
+<p><text> </text></p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="htmlwidget-0c6151b2451100a6094e" style="width:auto;height:auto;" class="vegawidget-vl5 html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0c6151b2451100a6094e">{"x":{
+<div id="htmlwidget-2008f388a62bcbc39f0f" style="width:auto;height:auto;" class="vegawidget-vl5 html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2008f388a62bcbc39f0f">{"x":{
   "chart_spec": {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "hconcat": [
       {
         "height": 250,
-        "title": "US Racial Minority Representation at Calvin",
+        "title": "US Racial Minority Rate at Calvin (%)",
         "width": 260,
         "mark": {
           "point": true,
@@ -205,6 +206,19 @@ ul.task-list li input[type="checkbox"] {
             }
           ]
         },
+        "params": [
+          {
+            "name": "panzoom",
+            "bind": "scales",
+            "select": {
+              "encodings": ["y", "x"],
+              "resolve": "global",
+              "translate": true,
+              "zoom": true,
+              "type": "interval"
+            }
+          }
+        ],
         "data": {
           "values": [
             {
@@ -668,6 +682,19 @@ ul.task-list li input[type="checkbox"] {
             }
           ]
         },
+        "params": [
+          {
+            "name": "panzoom",
+            "bind": "scales",
+            "select": {
+              "encodings": ["y", "x"],
+              "resolve": "global",
+              "translate": true,
+              "zoom": true,
+              "type": "interval"
+            }
+          }
+        ],
         "data": {
           "values": [
             {
@@ -1096,13 +1123,16 @@ ul.task-list li input[type="checkbox"] {
 },"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
-<p>US Racial Minority measure follows the measure of AHANA.</p>
-<p>AHANA: students or faculty members who identify themselves as African-, Hispanic-, Asian-, or Native-Americans and are U.S. Citizens or permanent residents of the U.S.</p>
-<p>Since percentages can be prone to error and misinterpretation, I looked into number of faculty who are racial minorities (AHANA)</p>
+<p><small><strong>NOTES: US Racial Minority measures students or faculty members who identify themselves as African-, Hispanic-, Asian-, or Native-Americans and are U.S. Citizens or permanent residents of the U.S </strong></small></p>
+<p><small><strong>ZOOM to interact with visualization. </strong></small></p>
+<p><text> </text></p>
+<p>Calvin University has welcomed international students since 1997. Their representation grew exponentially from 2.5% of the student body in 1997 to 12.7% in 2019. Notably, both domestic minority and international student enrollment experienced a sharp increase beginning in 2008.</p>
+<p>Another potential interesting insight is that a growth in faculty minority representation is often followed by a growth in student minority representation one years later. For example, faculty minority rate experienced an increase from 2001 to 2003, and student minority rate experienced an increase from 2002 to 2004. Faculty minority rate experienced a sharp increase from 2007 to 2009, and student minority rate experienced a sharp increase from 2008 to 2010.</p>
+<p>Percentage of faculty minority rates are stagnate, therefore I looked into the faculty minority numbers. Data suggests Calvin gains faculty members who are minority races steadily from 1998 to 2009, but starts to lose minority faculty since 2010.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="htmlwidget-56e146a57fbccb1b9d15" style="width:auto;height:auto;" class="vegawidget-vl5 html-widget"></div>
-<script type="application/json" data-for="htmlwidget-56e146a57fbccb1b9d15">{"x":{
+<div id="htmlwidget-3762c5a644dc362ba3f1" style="width:auto;height:auto;" class="vegawidget-vl5 html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3762c5a644dc362ba3f1">{"x":{
   "chart_spec": {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "height": 100,
@@ -1130,7 +1160,15 @@ ul.task-list li input[type="checkbox"] {
         "scale": {
           "zero": false
         }
-      }
+      },
+      "tooltip": [
+        {
+          "field": "year"
+        },
+        {
+          "field": "AHANA"
+        }
+      ]
     },
     "data": {
       "values": [
@@ -1305,10 +1343,13 @@ ul.task-list li input[type="checkbox"] {
 },"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
+<p><small><strong>NOTES: Data shows only CURRENT, FULL-TIME faculty, does not include part-time lecturer or emeriti.<br>
+</strong></small></p>
+<p>While Calvin University has become more diverse since 1997, it has not reached the deomographic composition of US population. In 2010, US minorities contribute to 36.2% of US population; and this number increased to 41.1% in 2020.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="htmlwidget-fbdb630296d4564fcd07" style="width:auto;height:auto;" class="vegawidget-vl5 html-widget"></div>
-<script type="application/json" data-for="htmlwidget-fbdb630296d4564fcd07">{"x":{
+<div id="htmlwidget-4f2aea5d2897f5020949" style="width:auto;height:auto;" class="vegawidget-vl5 html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4f2aea5d2897f5020949">{"x":{
   "chart_spec": {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "title": "US Racial and Ethnicity Demographic (% of population)",
@@ -1416,6 +1457,9 @@ ul.task-list li input[type="checkbox"] {
 },"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
+<p><text> </text></p>
+<p>Limitations of this analysis include the absence of data beyond 2019. Future research could explore trends in faculty and student minority representation during and after the COVID-19 pandemic. Additionally, examining the factors contributing to the decline in minority faculty representation could be valuable. Finally, while this analysis suggests a potential relationship between faculty and student minority representation, further research is needed to confirm this trend.</p>
+<p><text> </text></p>
 <section id="acknowledgement" class="level2">
 <h2 class="anchored" data-anchor-id="acknowledgement">acknowledgement</h2>
 <p>Calvin University Datasets used above are collected and maintained by <a href="https://calvin.edu/effectiveness-analytics">Calvin Institutional Effectiveness &amp; Analytics team</a></p>
